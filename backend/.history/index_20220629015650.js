@@ -1,0 +1,18 @@
+const connectToMongo = require('./db');
+const express = require('express')
+
+connectToMongo();
+
+const app = express()
+const port = 3000
+
+app.use(express.json())
+// it is a middleware used to get the body of the request 
+
+//routes
+app.use('/api/auth', require('./routes/auth'))
+app.use('/api/notes', require('./routes/notes'))
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
